@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+    db-mysql-8:
+        image: mysql:8
+        container_name: local-mysql
+        command: >
+            --default-authentication-plugin=mysql_native_password
+            --character-set-server=utf8mb4  --collation-server=utf8mb4_unicode_ci
+        restart: "unless-stopped"
+        ports:
+            - 3306:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: pw2023 # root/pw2023
+            MYSQL_DATABASE: test
+        networks:
+            - local-linux
+    db-mariadb-10:
+        image: mariadb:10
+        container_name: local-mariadb
+        command: >
+            --character-set-server=utf8mb4  --collation-server=utf8mb4_unicode_ci
+        restart: "unless-stopped"
+        ports:
+            - 3307:3306
+        environment:
+            MARIADB_ROOT_PASSWORD: pw2023 # root/pw2023
+            MARIADB_DATABASE: test
+        networks:
+            - local-linux
+    db-postgres-14:
+        image: postgres:14
+        container_name: local-postgres
+        restart: "unless-stopped"
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_DB=test
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=pw2023 # postgres/pw2023
+            - POSTGRES_INITDB_ARGS="--encoding=UTF8"
+        networks:
+            - local-linux
+
+networks:
+    local-linux:
