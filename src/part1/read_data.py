@@ -281,7 +281,7 @@ def print_all_employees_with_manager(conn: Connection):
     columns = [
         employee.c.employee_id,
         employee.c.name,
-        manager.c.name.label("manager"),
+        manager.c.name.label("manager_name"),
         manager.c.employee_id.label("manager_id"),
     ]
 
@@ -298,9 +298,9 @@ def print_all_employees_with_manager(conn: Connection):
 
     result = conn.execute(stmt)
     for row in result:
-        if row.manager is not None:
+        if row.manager_name is not None:
             print(f"{row.name}({row.employee_id})'s manager is "
-                  f"{row.manager}({row.manager_id}).")
+                  f"{row.manager_name}({row.manager_id}).")
         else:
             print(f"{row.name}({row.employee_id}) has no manager.")
 

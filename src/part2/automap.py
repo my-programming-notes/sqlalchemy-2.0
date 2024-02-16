@@ -17,9 +17,10 @@ if not DEBUG:
 
 
 def camelize_classname(base, tablename, table):
-    "Produce a 'camelized' class name, e.g. "
-    "'words_and_underscores' -> 'WordsAndUnderscores'"
-
+    """
+    Produce a 'camelized' class name, e.g.,
+    'words_and_underscores' is transformed into 'WordsAndUnderscores'.
+    """
     return str(tablename[0].upper() +
                re.sub(r'_([a-z])', lambda m: m.group(1).upper(), tablename[1:]))
 
@@ -28,9 +29,10 @@ _pluralizer = inflect.engine()
 
 
 def pluralize_collection(base, local_cls, referred_cls, constraint):
-    "Produce an 'uncamelized', 'pluralized' class name, e.g. "
-    "'SomeTerm' -> 'some_terms'"
-
+    """
+    Produce an 'uncamelized', 'pluralized' class name, e.g.,
+    'SomeTerm' becomes 'some_terms'.
+    """
     referred_name = referred_cls.__name__
     uncamelized = re.sub(r'[A-Z]',
                          lambda m: "_%s" % m.group(0).lower(),
@@ -68,7 +70,7 @@ def automap_custom(session: Session):
     )
     print("Classes reflected:", Base.classes.keys())
 
-    # repeat the example with customization:
+    # repeat the previous example with naming customization:
     order = session.scalars(
         select(Base.classes.Order).filter_by(order_id=1)
     ).one()
@@ -106,7 +108,7 @@ def automap_view(session: Session):
         autoload_with=engine,
     )
     Base.prepare(
-        autoload_with=engine,
+        # autoload_with=engine,  # to load all tables
         classname_for_table=camelize_classname,
         name_for_collection_relationship=pluralize_collection
     )

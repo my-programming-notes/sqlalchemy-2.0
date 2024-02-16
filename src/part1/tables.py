@@ -15,7 +15,7 @@ metadata = MetaData()
 
 engine = create_engine(
     DATABASE_URL,
-    # echo=True,
+    echo=True,
 )
 
 
@@ -59,6 +59,10 @@ product = Table(
     ),
     Column("type", Enum(ProductType), default=ProductType.OTHER),
 )
+# CheckConstraint(
+#     product.c.units_in_stock < 1_000_000,
+#     name="stock_upper_limit",
+# )
 
 customer = Table(
     "customer",

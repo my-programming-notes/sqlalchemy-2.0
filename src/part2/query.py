@@ -150,7 +150,7 @@ def n_plus_one_solved_with_join(session: Session):
         )
         .select_from(Customer)
         .join(Customer.orders)
-        .order_by(Customer.customer_id)
+        .order_by(Customer.customer_id, Order.order_id)
     )
     results = session.execute(stmt)
 

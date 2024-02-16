@@ -19,7 +19,7 @@ DATABASE_URL = "postgresql+psycopg2://postgres:pw2023@localhost:5432/test"
 
 engine = create_engine(
     DATABASE_URL,
-    # echo=True,
+    echo=True,
 )
 SessionMaker = sessionmaker(
     bind=engine,

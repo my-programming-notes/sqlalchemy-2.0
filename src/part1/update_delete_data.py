@@ -9,12 +9,12 @@ from tables import employee, engine, order, order_detail, product
 def decrement_product(
         conn: Connection,
         product_id: int,
-        amount: int = 1,
+        quantity: int = 1,
 ):
     stmt = (
         update(product)
         .where(product.c.product_id == product_id)
-        .values(units_in_stock=product.c.units_in_stock - amount)
+        .values(units_in_stock=product.c.units_in_stock - quantity)
     )
     print("SQL:", stmt)
     print("params:", stmt.compile().params)
@@ -26,12 +26,12 @@ def decrement_product(
 def decrement_product_and_return(
     conn: Connection,
     product_id: int,
-    amount: int = 1,
+    quantity: int = 1,
 ):
     stmt = (
         update(product)
         .where(product.c.product_id == product_id)
-        .values(units_in_stock=product.c.units_in_stock - amount)
+        .values(units_in_stock=product.c.units_in_stock - quantity)
         .returning(product.c.product_name, product.c.units_in_stock)
     )
     print("SQL:", stmt)
@@ -124,7 +124,7 @@ def process_order(conn: Connection, order_id: int):
         )
         conn.execute(stmt_update)
 
-        # you have to commit explicitly in commit-as-you-go
+        # commit explicitly in commit-as-you-go
         conn.commit()
 
 
@@ -210,6 +210,7 @@ def transaction_begin_once():
         conn.execute(stmt)
         stmt = insert(employee).values(name="Emily")
         conn.execute(stmt)
+        # the transaction is committed implicitly at the end of this block
 
 
 if __name__ == "__main__":

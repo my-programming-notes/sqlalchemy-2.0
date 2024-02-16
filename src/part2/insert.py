@@ -116,8 +116,10 @@ class DatabaseInitialization:
         if (len(customer_ids) != 2) or (len(product_ids) != 5):
             raise ValueError("The array length of IDs is not correct!")
 
-        # customer and product IDs:
+        # customer PKs:
         alex_id, mary_id = customer_ids
+
+        # product PKs:
         (
             phone_id,
             screen_protector_id,

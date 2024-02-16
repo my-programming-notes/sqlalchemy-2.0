@@ -192,7 +192,7 @@ def employee_reports_to(session: Session):
         select(
             Employee.name,
             Employee.employee_id,
-            Manager.name.label("manager"),
+            Manager.name.label("manager_name"),
             Manager.employee_id.label("manager_id"),
         )
         .join(Manager, Employee.manager_id == Manager.employee_id)
@@ -202,7 +202,7 @@ def employee_reports_to(session: Session):
     for row in session.execute(stmt):
         print(
             f"{row.name}#{row.employee_id} "
-            f"reports to {row.manager}#{row.manager_id}."
+            f"reports to {row.manager_name}#{row.manager_id}."
         )
 
 
