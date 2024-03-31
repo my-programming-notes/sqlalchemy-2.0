@@ -8,8 +8,8 @@ from sqlalchemy import (Boolean, CheckConstraint, Column, Date, DateTime, Enum,
                         ForeignKey, Index, Integer, MetaData, Numeric, String,
                         Table, create_engine)
 
-# DATABASE_URL = "sqlite+pysqlite:///store.db"
-DATABASE_URL = "postgresql+psycopg2://postgres:pw2023@localhost:5432/test"
+DATABASE_URL = "sqlite+pysqlite:///store.db"
+# DATABASE_URL = "postgresql+psycopg2://postgres:pw2023@localhost:5432/test"
 
 metadata = MetaData()
 

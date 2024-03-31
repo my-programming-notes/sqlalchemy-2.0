@@ -18,8 +18,8 @@ from sqlalchemy.orm import (DeclarativeBase, Mapped, MappedAsDataclass,
                             sessionmaker)
 
 # You may want to place general configuration into its own separate file:
-DATABASE_URL = "postgresql+psycopg2://postgres:pw2023@localhost:5432/test"
-# DATABASE_URL = "sqlite+pysqlite:///store.db"
+# DATABASE_URL = "postgresql+psycopg2://postgres:pw2023@localhost:5432/test"
+DATABASE_URL = "sqlite+pysqlite:///store.db"
 
 engine = create_engine(
     DATABASE_URL,

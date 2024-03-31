@@ -11,7 +11,7 @@ from models import (Customer, Employee, Order, OrderDetail, Product,
 from sqlalchemy import insert
 from sqlalchemy.orm import Session
 
-DEBUG = False
+DEBUG = True
 
 if not DEBUG:
     logging.disable(logging.INFO)
