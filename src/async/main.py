@@ -1,6 +1,7 @@
 """
 SQLAlchemy Integration with FastAPI.
 """
+from typing import AsyncGenerator
 import crud
 import schemas
 from fastapi import Depends, FastAPI
@@ -11,7 +12,7 @@ app = FastAPI()
 
 
 # Dependency Injection
-async def get_session() -> AsyncSession:
+async def get_session() -> AsyncGenerator[AsyncSession, None]:
     async with AsyncSessionMaker() as session:
         yield session
 
