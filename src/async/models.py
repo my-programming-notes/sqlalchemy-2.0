@@ -100,7 +100,7 @@ class Employee(Base):
 
     first_name: Mapped[str_127] = mapped_column(
         CheckConstraint(
-            "length(name)>0",
+            "length(first_name)>0",
             name="name_length_must_be_at_least_one_character",
         ),
         default="",
